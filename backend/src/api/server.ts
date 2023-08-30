@@ -3,9 +3,14 @@ import { readFile } from '../helpers/file.js';
 
 const app = express();
 
-app.get('/', async (req, res, next) => {
+app.get('/offers', async (req, res, next) => {
   const offers = await readFile('100_offers.json');
   res.json(offers);
+});
+
+app.get('/skills', async (req, res, next) => {
+  const skills = await readFile('simple.json');
+  res.json(skills);
 });
 
 app.listen(8080, () => {
