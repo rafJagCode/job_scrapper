@@ -1,0 +1,35 @@
+@font-face {
+  font-family: RobotoRegular;
+  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: RobotoItalic;
+  src: url('../assets/fonts/Roboto-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 700;
+  font-style: bold;
+}
+
+html {
+  font-family: 'RobotoRegular', sans-serif;
+  font-size: calc(5px + (13 - 5) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.icon {
+  &.sm {
+    width: 1.1rem;
+  }
+  &.md {
+    width: 1.5rem;
+  }
+  &.lg {
+    width: 2rem;
+  }
+}
