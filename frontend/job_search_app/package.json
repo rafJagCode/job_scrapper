@@ -14,7 +14,8 @@
     "@heroicons/vue": "^2.0.18",
     "@types/node": "^20.5.7",
     "axios": "^1.5.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-uuid": "^3.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.5.0",
