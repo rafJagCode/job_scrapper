@@ -21,7 +21,7 @@ class OfferService {
     }
   }
 
-  async getAllSkills(): Promise<Offer[] | undefined> {
+  async getAllSkills(): Promise<string[] | undefined> {
     try {
       return (await this.http.get('/skills')).data;
     } catch (e) {
