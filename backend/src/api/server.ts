@@ -12,8 +12,13 @@ app.get('/offers', async (req, res, next) => {
 });
 
 app.get('/skills', async (req, res, next) => {
-  const skills = await readFile('simple.json');
+  const skills = await readFile('all_skills.json');
   res.json(skills);
+});
+
+app.get('/cities', async (req, res, next) => {
+  const cities = await readFile('all_cities.json');
+  res.json(cities);
 });
 
 app.listen(8080, () => {
