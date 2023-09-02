@@ -1,11 +1,28 @@
 <script setup lang="ts">
 import { uuid } from 'vue-uuid';
+import useFilters from './composables/useFilters';
+import { ref, watch } from 'vue';
+
+const props = defineProps<{
+  type: string;
+  value: string;
+}>();
+
 const id = uuid.v4();
+
+const { addFilter, removeFilter, isSelected } = useFilters();
+
+const isChecked = ref(isSelected(props.type, props.value));
+
+watch(isChecked, () => {
+  if (!isChecked.value) return removeFilter(props.type, props.value);
+  return addFilter(props.type, props.value);
+});
 </script>
 
 <template>
   <label class="checkbox" :for="id">
-    <input class="checkbox__input" type="checkbox" :id="id" />
+    <input class="checkbox__input" type="checkbox" :id="id" v-model="isChecked" />
     <div class="checkbox__background"></div>
     <div class="checkbox__text">
       <slot></slot>

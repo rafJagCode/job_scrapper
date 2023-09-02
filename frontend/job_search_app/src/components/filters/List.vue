@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import CheckBox from './CheckBox.vue';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const search = ref('');
 const isSearchFocused = ref(false);
 
+const filteredItems = computed(() => {
+  if (!search.value.length) return props.items;
+  const regexp = new RegExp(`${search.value}`, 'gi');
+  return props.items.filter((item) => item.match(regexp));
+});
+
 const props = defineProps<{
-  items: string[];
+  type: string;
+  items: string[] | undefined;
 }>();
 </script>
 
@@ -19,8 +26,8 @@ const props = defineProps<{
       <p class="list__search_placeholder" :data-transformed="isSearchFocused || search.length > 0">Search</p>
     </div>
     <ul class="list__items">
-      <li v-for="item in items" :key="item">
-        <CheckBox>{{ item }}</CheckBox>
+      <li v-for="item in filteredItems" :key="item">
+        <CheckBox :type="type" :value="item">{{ item }}</CheckBox>
       </li>
     </ul>
   </div>
@@ -30,6 +37,7 @@ const props = defineProps<{
 .list {
   width: 100%;
   height: auto;
+  margin: 1rem 0;
 }
 .list__search {
   position: relative;
