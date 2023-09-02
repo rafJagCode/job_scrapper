@@ -5,19 +5,16 @@ import OffersService from '@services/OffersService';
 import { Offer } from '@my_types/Offer';
 import { ref, onMounted } from 'vue';
 
-const offers = ref<Offer[]>([]);
-const skills = ref<string[]>([]);
+const offers = ref<Offer[] | undefined>([]);
 
 onMounted(async () => {
-  const offersService = new OffersService();
-  offers.value = await offersService.getAllOffers();
-  skills.value = await offersService.getAllSkills();
+  offers.value = await new OffersService().getAllOffers();
 });
 </script>
 
 <template>
   <main class="search_page">
-    <Filters :skills="skills" />
+    <Filters />
     <JobOffer v-for="(offer, index) in offers" :key="index" :offer="offer" />
   </main>
 </template>
