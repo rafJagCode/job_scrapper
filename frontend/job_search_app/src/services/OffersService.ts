@@ -28,6 +28,14 @@ class OfferService {
       console.log(e);
     }
   }
+
+  async getAllCities(): Promise<string[] | undefined> {
+    try {
+      return (await this.http.get('/cities')).data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export default OfferService;
