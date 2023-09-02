@@ -1,8 +1,6 @@
 /backend/node_modules
 /backend/dist
 /backend/100_offers.json
-/backend/100_offers.ts
+/backend/all_cities.json
 /backend/all_offers.json
-/backend/simple_map.json
-/backend/simple.json
-/backend/technologies.json
+/backend/all_skills.json
