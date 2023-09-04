@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CheckBox from './CheckBox.vue';
+import { Filters } from '@my_types/Filters';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 import { ref, computed } from 'vue';
 
@@ -7,14 +8,15 @@ const search = ref('');
 const isSearchFocused = ref(false);
 
 const filteredItems = computed(() => {
+  if (!props.items || !props.items.length) return [];
   if (!search.value.length) return props.items;
   const regexp = new RegExp(`${search.value}`, 'gi');
   return props.items.filter((item) => item.match(regexp));
 });
 
 const props = defineProps<{
-  type: string;
-  items: string[] | undefined;
+  type: Exclude<keyof Filters, 'onlySpecifiedSalary'>;
+  items: string[] | null;
 }>();
 </script>
 
