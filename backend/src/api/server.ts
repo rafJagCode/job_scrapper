@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 app.get('/offers', async (req, res, next) => {
-  const offers = await readFile('100_offers.json');
+  const offers = await readFile('all_offers.json');
   res.json(offers);
 });
 
