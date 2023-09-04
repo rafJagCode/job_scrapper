@@ -1,3 +1,4 @@
+import { Filters } from '@my_types/Filters';
 import { reactive } from 'vue';
 
 const filters = reactive({
@@ -9,39 +10,20 @@ const filters = reactive({
 });
 
 const useFilters = () => {
-  const getFilterName = (type) => {
-    switch (type) {
-      case 'workMode': {
-        return 'workModes';
-      }
-      case 'experiencLevel': {
-        return 'experienceLevels';
-      }
-      case 'skill': {
-        return 'skills';
-      }
-      case 'city': {
-        return 'cities';
-      }
-      default: {
-        return null;
-      }
-    }
+  const setOnlySpecificSalary = (value: boolean) => (filters.onlySpecifiedSalary = value);
+
+  const isSelected = (type: Exclude<keyof Filters, 'onlySpecifiedSalary'>, value: string) => {
+    const filter: string[] = filters[type];
+    return filter.includes(value);
   };
 
-  const setOnlySpecificSalary = (value) => (filters.onlySpecifiedSalary = value);
-
-  const isSelected = (type, value) => {
-    return filters[getFilterName(type)].includes(value);
+  const addFilter = (type: Exclude<keyof Filters, 'onlySpecifiedSalary'>, value: string) => {
+    const filter: string[] = filters[type];
+    filter.push(value);
   };
 
-  const addFilter = (type, value) => {
-    filters[getFilterName(type)].push(value);
-  };
-
-  const removeFilter = (type, value) => {
-    const filterName = getFilterName(type);
-    filters[filterName] = filters[filterName].filter((el) => el !== value);
+  const removeFilter = (type: Exclude<keyof Filters, 'onlySpecifiedSalary'>, value: string) => {
+    filters[type] = filters[type].filter((el: string) => el !== value);
   };
 
   return { filters, addFilter, removeFilter, isSelected, setOnlySpecificSalary };
