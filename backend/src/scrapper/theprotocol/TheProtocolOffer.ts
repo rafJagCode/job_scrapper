@@ -12,7 +12,7 @@ export type TheprotocolOffer = {
   typesOfContracts: TypesOfContract[];
   technologies: string[];
   new: boolean;
-  publicationDateUtc: Date;
+  publicationDateUtc: string;
   lastCall: boolean;
   language: Language;
   salary: TheprotocolOfferSalary | null;

@@ -5,8 +5,8 @@ export type PracujOffer = {
   companyProfileAbsoluteUri: string;
   companyId: number;
   companyLogoUri: null | string;
-  lastPublicated: Date;
-  expirationDate: Date;
+  lastPublicated: string;
+  expirationDate: string;
   salaryDisplayText: string;
   jobDescription: string;
   isSuperOffer: boolean;

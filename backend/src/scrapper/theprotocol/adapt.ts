@@ -2,16 +2,18 @@ import { Offer } from '../Offer.js';
 import { TheprotocolOffer } from './TheProtocolOffer.js';
 
 export const adapt = (offer: TheprotocolOffer): Offer => {
+  const id = offer.id;
+  const link = `https://theprotocol.it/szczegoly/praca/${offer.offerUrlName}`;
   const source = 'theprotocol';
   const title = offer.title;
   const cities = adaptCities(offer);
-  const work_modes = adaptWorkModes(offer);
-  const experience_levels = adaptExperienceLevel(offer);
+  const workModes = adaptWorkModes(offer);
+  const experienceLevels = adaptExperienceLevel(offer);
   const published = offer.publicationDateUtc;
   const skills = offer.technologies;
   const salary = adaptSalary(offer);
 
-  return { source, title, cities, work_modes, experience_levels, published, skills, salary };
+  return { id, link, source, title, cities, workModes, experienceLevels, published, skills, salary };
 };
 
 const adaptCities = (offer: TheprotocolOffer): Offer['cities'] => {
@@ -19,7 +21,7 @@ const adaptCities = (offer: TheprotocolOffer): Offer['cities'] => {
   return cities;
 };
 
-const adaptWorkModes = (offer: TheprotocolOffer): Offer['work_modes'] => {
+const adaptWorkModes = (offer: TheprotocolOffer): Offer['workModes'] => {
   const work_modes = offer.workModes.reduce((acc, workMode) => {
     if (['hybrydowa', 'hybrid'].includes(workMode)) return [...acc, 'hybrid'];
     if (['stacjonarna', 'full office'].includes(workMode)) return [...acc, 'stationary'];
@@ -28,7 +30,7 @@ const adaptWorkModes = (offer: TheprotocolOffer): Offer['work_modes'] => {
   return [...new Set(work_modes)];
 };
 
-const adaptExperienceLevel = (offer: TheprotocolOffer): Offer['experience_levels'] => {
+const adaptExperienceLevel = (offer: TheprotocolOffer): Offer['experienceLevels'] => {
   const experience_levels = offer.positionLevels.reduce((acc, level) => {
     if (['assistant', 'blue collar', 'trainee', 'junior'].includes(level.value)) return [...acc, 'junior'];
     if (['head', 'manager', 'senior', 'expert', 'lead'].includes(level.value)) return [...acc, 'senior'];

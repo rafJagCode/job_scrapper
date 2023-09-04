@@ -1,10 +1,12 @@
 export type Offer = {
+  id: string;
+  link: string;
   source: Source;
   title: string;
   cities: string[];
-  work_modes: WorkMode[];
-  experience_levels: ExperienceLevel[];
-  published: Date;
+  workModes: WorkMode[];
+  experienceLevels: ExperienceLevel[];
+  published: string;
   skills: string[];
   salary: {
     from: number;

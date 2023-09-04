@@ -2,18 +2,20 @@ import { Offer } from '../Offer.js';
 import { JustJoinItOffer } from './JustJoinItOffer.js';
 
 export const adapt = (offer: JustJoinItOffer): Offer => {
+  const id = offer.id;
+  const link = `https://justjoin.it/offers/${offer.id}`;
   const source = 'justjoinit';
   const title = offer.title;
   const cities = [offer.city];
-  const work_modes = adaptWorkModes(offer);
-  const experience_levels = [offer.experience_level];
+  const workModes = adaptWorkModes(offer);
+  const experienceLevels = [offer.experience_level];
   const published = offer.published_at;
   const skills = adaptSkills(offer);
   const salary = adaptSalary(offer);
-  return { source, title, cities, work_modes, experience_levels, published, skills, salary };
+  return { id, link, source, title, cities, workModes, experienceLevels, published, skills, salary };
 };
 
-const adaptWorkModes = (offer: JustJoinItOffer): Offer['work_modes'] => {
+const adaptWorkModes = (offer: JustJoinItOffer): Offer['workModes'] => {
   const work_modes = [];
   if (offer.workplace_type === 'office') work_modes.push('stationary');
   else if (offer.workplace_type === 'partly_remote') work_modes.push('hybrid');

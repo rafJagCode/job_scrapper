@@ -12,7 +12,7 @@ export type JustJoinItOffer = {
   experience_level: ExperienceLevel;
   latitude: string;
   longitude: string;
-  published_at: Date;
+  published_at: string;
   remote_interview: boolean;
   open_to_hire_ukrainians: boolean;
   id: string;
