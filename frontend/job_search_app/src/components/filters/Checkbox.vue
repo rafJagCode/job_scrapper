@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { uuid } from 'vue-uuid';
 import useFilters from './composables/useFilters';
+import { Filters } from '@my_types/Filters';
 import { ref, watch } from 'vue';
 
 const props = defineProps<{
-  type: string;
+  type: Exclude<keyof Filters, 'onlySpecifiedSalary'>;
   value: string;
 }>();
 
