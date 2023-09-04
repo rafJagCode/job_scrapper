@@ -1,21 +1,12 @@
 <script setup lang="ts">
-import JobOffer from '@components/job_offer/JobOffer.vue';
-import Filters from '@components/filters/Filters.vue';
-import OffersService from '@services/OffersService';
-import { Offer } from '@my_types/Offer';
-import { ref, onMounted } from 'vue';
-
-const offers = ref<Offer[] | undefined>([]);
-
-onMounted(async () => {
-  offers.value = await new OffersService().getAllOffers();
-});
+import OffersFilters from '@components/filters/OffersFilters.vue';
+import JobOffers from '@components/job_offers/JobOffers.vue';
 </script>
 
 <template>
   <main class="search_page">
-    <Filters />
-    <JobOffer v-for="(offer, index) in offers" :key="index" :offer="offer" />
+    <OffersFilters />
+    <JobOffers />
   </main>
 </template>
 
@@ -23,6 +14,7 @@ onMounted(async () => {
 .search_page {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   background-color: $primary;
   overflow: auto;
 }
