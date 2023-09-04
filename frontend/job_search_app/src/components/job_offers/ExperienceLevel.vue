@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ExperienceLevel } from '@/types/Offer';
 
-const props = defineProps<{
-  experience_level: ExperienceLevel;
+const _props = defineProps<{
+  experienceLevel: ExperienceLevel;
 }>();
 </script>
 
 <template>
-  <div class="experience_level" :data-experience-level="experience_level">{{ experience_level.toUpperCase() }}</div>
+  <div class="experience_level" :data-experience-level="experienceLevel">{{ experienceLevel.toUpperCase() }}</div>
 </template>
 
 <style lang="scss">
