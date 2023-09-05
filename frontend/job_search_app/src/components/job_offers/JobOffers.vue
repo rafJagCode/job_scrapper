@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import JobOffer from './JobOffer.vue';
+import OffersLoader from '@/components/loaders/OffersLoader.vue';
 import OffersService from '@services/OffersService';
 import useFilters from '@/components/filters/composables/useFilters';
 import getFilteredOffers from '@utils/getFilteredOffers';
@@ -9,7 +10,6 @@ import { ref, onMounted, computed } from 'vue';
 
 const { filters } = useFilters();
 const offers = ref<Offer[] | null>(null);
-const error = ref<string | null>(null);
 
 const filteredOffers = computed(() => {
   return getFilteredOffers(offers.value, filters);
@@ -18,14 +18,13 @@ const filteredOffers = computed(() => {
 const { offersToRender } = useLazyOffersRender(filteredOffers);
 
 onMounted(async () => {
-  const { data, errorMessage } = await new OffersService().getAllOffers();
-  offers.value = data.value;
-  error.value = errorMessage.value;
+  offers.value = (await new OffersService().getAllOffers()).data.value;
 });
 </script>
 
 <template>
   <div class="job_offers">
+    <OffersLoader v-if="!offers" />
     <JobOffer v-for="offer in offersToRender" :key="offer.id" :offer="offer" />
     <div id="end"></div>
   </div>

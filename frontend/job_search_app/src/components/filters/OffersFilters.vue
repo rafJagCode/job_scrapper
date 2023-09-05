@@ -4,22 +4,17 @@ import SalarySlider from './SalarySlider.vue';
 import Checkbox from './CheckBox.vue';
 import CollapsibleContainer from './CollapsibleContainer.vue';
 import SearchableList from './SearchableList.vue';
+import FilterLoader from '@/components/loaders/FilterLoader.vue';
 import OffersService from '@/services/OffersService';
 import { ref, onMounted } from 'vue';
 
 const skills = ref<null | string[]>(null);
-const skillsError = ref<null | string>(null);
 const cities = ref<null | string[]>(null);
-const citiesError = ref<null | string>(null);
 
 onMounted(async () => {
   const offersService = new OffersService();
-  const { data: skillsData, errorMessage: skillsErrorMessage } = await offersService.getAllSkills();
-  skills.value = skillsData.value;
-  skillsError.value = skillsErrorMessage.value;
-  const { data: citiesData, errorMessage: citiesErrorMessage } = await offersService.getAllCities();
-  cities.value = citiesData.value;
-  citiesError.value = citiesErrorMessage.value;
+  skills.value = (await offersService.getAllSkills()).data.value;
+  cities.value = (await offersService.getAllCities()).data.value;
 });
 </script>
 
@@ -49,13 +44,15 @@ onMounted(async () => {
         </div>
       </template>
     </CollapsibleContainer>
-    <CollapsibleContainer>
+    <FilterLoader v-if="!skills" :text="'Skills'" />
+    <CollapsibleContainer v-else>
       <template v-slot:title>Skills</template>
       <template v-slot:content>
         <SearchableList :items="skills" :type="'skills'" />
       </template>
     </CollapsibleContainer>
-    <CollapsibleContainer>
+    <FilterLoader v-if="!cities" :text="'Cities'" />
+    <CollapsibleContainer v-else>
       <template v-slot:title>Cities</template>
       <template v-slot:content>
         <SearchableList :items="cities" :type="'cities'" />
@@ -74,6 +71,7 @@ onMounted(async () => {
   border: 0.5px solid $secondary;
   border-bottom: none;
   overflow-y: auto;
+  user-select: none;
 }
 .filters__salary {
   height: 3.5rem;
