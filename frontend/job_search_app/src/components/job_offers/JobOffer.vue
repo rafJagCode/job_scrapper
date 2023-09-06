@@ -60,7 +60,7 @@ const salary = (): string => {
   position: relative;
   cursor: pointer;
   background-color: $secondary;
-  margin: 1rem 1rem 1rem auto;
+  margin: 0 1rem 1rem auto;
   padding: 0.5rem 2rem;
   height: 7.6rem;
   width: 100%;
