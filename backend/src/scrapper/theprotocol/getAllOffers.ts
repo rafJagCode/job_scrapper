@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import { TheprotocolOffer } from './TheProtocolOffer.js';
 
 export const getAllOffers = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
 
   await page.goto('https://theprotocol.it');
