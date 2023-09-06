@@ -68,7 +68,7 @@ onMounted(async () => {
   width: $filters-width;
   height: auto;
   max-height: calc(100vh - 2 * $filters-margin);
-  border: 0.5px solid $secondary;
+  border: 0.5px solid $secondary-light;
   border-bottom: none;
   overflow-y: auto;
   user-select: none;
@@ -80,7 +80,7 @@ onMounted(async () => {
   justify-content: space-between;
   font-size: 1.2rem;
   color: $light;
-  border-bottom: 0.5px solid $secondary;
+  border-bottom: 0.5px solid $secondary-light;
 }
 .collapsible__work_modes {
   display: flex;

@@ -25,7 +25,7 @@ const isCollapsed = ref(true);
   cursor: pointer;
   width: 100%;
   height: auto;
-  border-bottom: 0.5px solid $secondary;
+  border-bottom: 0.5px solid $secondary-light;
 }
 .collapsible__header {
   padding: 1rem;
