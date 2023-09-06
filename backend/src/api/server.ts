@@ -1,24 +1,41 @@
-import express from 'express';
-import cors from 'cors';
 import { readFile } from '../helpers/file.js';
+import DataUpdater from '../scrapper/updating_data/DataUpdater.js';
+import express, { Response, NextFunction } from 'express';
+import cors from 'cors';
 
+const dataUpdater = new DataUpdater();
 const app = express();
+
+dataUpdater.start();
 
 app.use(cors());
 
+const handleUpdating = (res: Response) => {
+  res.status(503).send({ message: 'Server is now busy with updating job offers. Please try again in few minutes.' });
+};
+
+const sendFileContent = async (res: Response, next: NextFunction, filePath: string) => {
+  try {
+    const fileContent = await readFile(filePath);
+    res.json(fileContent);
+  } catch (err) {
+    next(err);
+  }
+};
+
 app.get('/offers', async (req, res, next) => {
-  const offers = await readFile('all_offers.json');
-  res.json(offers);
+  if (dataUpdater.isUpdating()) handleUpdating(res);
+  else sendFileContent(res, next, 'all_offers.json');
 });
 
 app.get('/skills', async (req, res, next) => {
-  const skills = await readFile('all_skills.json');
-  res.json(skills);
+  if (dataUpdater.isUpdating()) handleUpdating(res);
+  else sendFileContent(res, next, 'all_skills.json');
 });
 
 app.get('/cities', async (req, res, next) => {
-  const cities = await readFile('all_cities.json');
-  res.json(cities);
+  if (dataUpdater.isUpdating()) handleUpdating(res);
+  else sendFileContent(res, next, 'all_cities.json');
 });
 
 app.listen(8080, () => {
