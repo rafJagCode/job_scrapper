@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { HomeIcon, BuildingOfficeIcon, ScaleIcon } from '@heroicons/vue/24/outline';
 import SalarySlider from './SalarySlider.vue';
-import Checkbox from './CheckBox.vue';
+import CheckBox from './CheckBox.vue';
 import CollapsibleContainer from './CollapsibleContainer.vue';
 import SearchableList from './SearchableList.vue';
 import FilterLoader from '@/components/loaders/FilterLoader.vue';
@@ -28,9 +28,9 @@ onMounted(async () => {
       <template v-slot:title>Work Modes</template>
       <template v-slot:content>
         <div class="collapsible__work_modes">
-          <Checkbox :type="'workModes'" :value="'remote'"><HomeIcon class="icon sm" />Remote</Checkbox>
-          <Checkbox :type="'workModes'" :value="'stationary'"><BuildingOfficeIcon class="icon sm" />Stationary</Checkbox>
-          <Checkbox :type="'workModes'" :value="'hybrid'"><ScaleIcon class="icon sm" />Hybrid</Checkbox>
+          <CheckBox :type="'workModes'" :value="'remote'"><HomeIcon class="icon sm" />Remote</CheckBox>
+          <CheckBox :type="'workModes'" :value="'stationary'"><BuildingOfficeIcon class="icon sm" />Stationary</CheckBox>
+          <CheckBox :type="'workModes'" :value="'hybrid'"><ScaleIcon class="icon sm" />Hybrid</CheckBox>
         </div>
       </template>
     </CollapsibleContainer>
@@ -38,9 +38,9 @@ onMounted(async () => {
       <template v-slot:title>Experience Levels</template>
       <template v-slot:content>
         <div class="collapsible__experience_levels">
-          <Checkbox :type="'experienceLevels'" :value="'junior'">Junior</Checkbox>
-          <Checkbox :type="'experienceLevels'" :value="'mid'">Mid</Checkbox>
-          <Checkbox :type="'experienceLevels'" :value="'senior'">Senior</Checkbox>
+          <CheckBox :type="'experienceLevels'" :value="'junior'">Junior</CheckBox>
+          <CheckBox :type="'experienceLevels'" :value="'mid'">Mid</CheckBox>
+          <CheckBox :type="'experienceLevels'" :value="'senior'">Senior</CheckBox>
         </div>
       </template>
     </CollapsibleContainer>
