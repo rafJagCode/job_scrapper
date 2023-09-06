@@ -41,7 +41,7 @@ const salary = (): string => {
       </div>
     </div>
     <div class="job_offer__cities_and_work_modes">
-      <div class="job_offer__cities"><MapIcon class="icon md" />{{ cities() }}</div>
+      <div class="job_offer__cities" v-if="offer.cities.length"><MapIcon class="icon md" />{{ cities() }}</div>
       <div class="job_offer__work_modes">
         <WorkMode v-for="(workMode, index) in offer.workModes" :key="index" :workMode="workMode" />
       </div>
