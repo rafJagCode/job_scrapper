@@ -1,21 +1,14 @@
 <script setup lang="ts">
 import useFilters from './composables/useFilters';
 import { uuid } from 'vue-uuid';
-import { ref, watch } from 'vue';
 
 const id = uuid.v4();
-const { setOnlySpecificSalary } = useFilters();
-
-const isChecked = ref(false);
-
-watch(isChecked, () => {
-  setOnlySpecificSalary(isChecked.value);
-});
+const { filters } = useFilters();
 </script>
 
 <template>
   <label class="slider" :for="id">
-    <input class="slider__input" type="checkbox" :id="id" v-model="isChecked" />
+    <input class="slider__input" type="checkbox" :id="id" value="specified salary" v-model="filters['onlySpecifiedSalary']" />
     <div class="slider__background"></div>
     <div class="slider__ball"></div>
   </label>

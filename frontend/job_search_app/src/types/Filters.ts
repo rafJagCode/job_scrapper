@@ -1,7 +1,7 @@
 import { WorkMode, ExperienceLevel } from './Offer';
 
 export type Filters = {
-  onlySpecifiedSalary: boolean;
+  onlySpecifiedSalary: 'specified salary'[];
   workModes: WorkMode[];
   experienceLevels: ExperienceLevel[];
   skills: string[];

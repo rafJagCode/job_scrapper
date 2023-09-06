@@ -9,7 +9,7 @@ const getFilteredOffers = (offers: Offer[] | null, filters: Filters) => {
 
 const getFiltersToApply = (filters: Filters) => {
   const filtersToApply: ((_offer: Offer) => boolean)[] = [];
-  if (filters.onlySpecifiedSalary) filtersToApply.push(hasSpecifiedSalary);
+  if (filters.onlySpecifiedSalary.length > 0) filtersToApply.push(hasSpecifiedSalary);
   if (filters.workModes.length > 0) filtersToApply.push(hasOneOf(filters, 'workModes'));
   if (filters.experienceLevels.length > 0) filtersToApply.push(hasOneOf(filters, 'experienceLevels'));
   if (filters.skills.length > 0) filtersToApply.push(hasOneOf(filters, 'skills'));

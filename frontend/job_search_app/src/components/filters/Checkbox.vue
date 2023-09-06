@@ -2,28 +2,20 @@
 import { uuid } from 'vue-uuid';
 import useFilters from './composables/useFilters';
 import { Filters } from '@my_types/Filters';
-import { ref, watch } from 'vue';
 
-const props = defineProps<{
-  type: Exclude<keyof Filters, 'onlySpecifiedSalary'>;
+const _props = defineProps<{
+  type: keyof Filters;
   value: string;
 }>();
 
 const id = uuid.v4();
 
-const { addFilter, removeFilter, isSelected } = useFilters();
-
-const isChecked = ref(isSelected(props.type, props.value));
-
-watch(isChecked, () => {
-  if (!isChecked.value) return removeFilter(props.type, props.value);
-  return addFilter(props.type, props.value);
-});
+const { filters } = useFilters();
 </script>
 
 <template>
   <label class="checkbox" :for="id">
-    <input class="checkbox__input" type="checkbox" :id="id" v-model="isChecked" />
+    <input class="checkbox__input" type="checkbox" :id="id" :value="value" v-model="filters[type]" />
     <div class="checkbox__background"></div>
     <div class="checkbox__text">
       <slot></slot>
@@ -53,7 +45,6 @@ watch(isChecked, () => {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
   border: 0.5px solid $light-grey;
   border-radius: 10rem;
   transition: 100ms;
