@@ -7,6 +7,7 @@ const useErrorDialog = () => {
 };
 
 const showError = (error: ApiError) => {
+  if (errors.value.some((err) => err.message === error.message)) return;
   errors.value.push(error);
 };
 
