@@ -22,6 +22,10 @@ html {
   font-size: calc(5px + (13 - 5) * ((100vw - 300px) / (1600 - 300)));
 }
 
+body {
+  overflow: hidden;
+}
+
 .icon {
   &.sm {
     width: 1.1rem;

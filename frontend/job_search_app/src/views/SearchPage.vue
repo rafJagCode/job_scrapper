@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import OffersFilters from '@components/filters/OffersFilters.vue';
+import SortingBar from '@components/sorting_bar/SortingBar.vue';
 import JobOffers from '@components/job_offers/JobOffers.vue';
 </script>
 
 <template>
   <main class="search_page">
     <OffersFilters />
+    <SortingBar />
     <JobOffers />
   </main>
 </template>
