@@ -38,7 +38,8 @@ class OfferService {
       data.value = (await this.http.get(endpoint)).data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        showError({ id: uuid.v4(), message: err.message });
+        if (err.response) showError({ id: uuid.v4(), message: err.response.data.message });
+        else showError({ id: uuid.v4(), message: 'There was some problem with accessing server. Check your network and try again.' });
       } else showError({ id: uuid.v4(), message: 'Oops! Unexpected error occured. Please try again.' });
     }
     return { data };
@@ -46,5 +47,3 @@ class OfferService {
 }
 
 export default OfferService;
-// 'Oops! Unexpected error occured. Please try again.';
-// 'Oops! Something went wrong while trying to get the information you requested. Please check your internet connection and try again.';
