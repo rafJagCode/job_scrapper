@@ -1,20 +1,21 @@
 import { Offer } from '@my_types/Offer';
 import { ref, computed, onMounted, onUnmounted, watch, Ref } from 'vue';
 
-const renderBatchSize: number = 10;
-const amountOfRenderedOffers = ref<number>(renderBatchSize);
+const RENDER_BATCH_SIZE: number = 10;
+const amountOfRenderedOffers = ref<number>(RENDER_BATCH_SIZE);
 
 const useLazyOffersRender = (offers: Ref<Offer[]>) => {
-  const endObserver = new IntersectionObserver(
-    (entries) => {
-      if (!entries[0].isIntersecting) return;
-      if (amountOfRenderedOffers.value >= offers.value.length) return;
-      addOffersToRender(renderBatchSize);
-    },
-    { rootMargin: '30%' },
-  );
+  let endObserver: IntersectionObserver;
 
   onMounted(() => {
+    endObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return;
+        if (amountOfRenderedOffers.value >= offers.value.length) return;
+        addOffersToRender(RENDER_BATCH_SIZE);
+      },
+      { root: document.querySelector('.job_offers'), rootMargin: '30%' },
+    );
     endObserver.observe(getEndElement() as HTMLElement);
   });
   onUnmounted(() => endObserver.unobserve(getEndElement() as HTMLElement));
@@ -29,7 +30,7 @@ const useLazyOffersRender = (offers: Ref<Offer[]>) => {
 };
 
 const reset = () => {
-  amountOfRenderedOffers.value = renderBatchSize;
+  amountOfRenderedOffers.value = RENDER_BATCH_SIZE;
 };
 
 const getEndElement = () => {
