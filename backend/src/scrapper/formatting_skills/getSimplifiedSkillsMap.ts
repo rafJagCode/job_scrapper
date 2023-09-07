@@ -21,6 +21,6 @@ const getArrayOfGoodSkills = (skills: string): string[] => {
   return splittedSkills.filter((skill) => !artefacts.includes(skill));
 };
 
-const artefacts: string[] = ['', '1.1', '2', '2.0', '20012', '3', '4', '802.1x', 'a', 'b', 'z'];
+const artefacts: string[] = ['', '1.1', '2', '2.0', '20012', '3', '4', '802.1x', 'a', 'b', 'z', '.', '1', '8', '8.1'];
 
 export default getSimplifiedSkillsMap;
