@@ -1,7 +1,7 @@
 import { Offer } from '@my_types/Offer';
 import { ref, computed, onMounted, onUnmounted, watch, Ref } from 'vue';
 
-const RENDER_BATCH_SIZE: number = 10;
+const RENDER_BATCH_SIZE: number = 30;
 const amountOfRenderedOffers = ref<number>(RENDER_BATCH_SIZE);
 
 const useLazyOffersRender = (offers: Ref<Offer[]>) => {
@@ -14,7 +14,7 @@ const useLazyOffersRender = (offers: Ref<Offer[]>) => {
         if (amountOfRenderedOffers.value >= offers.value.length) return;
         addOffersToRender(RENDER_BATCH_SIZE);
       },
-      { root: document.querySelector('.job_offers'), rootMargin: '30%' },
+      { root: document.querySelector('.job_offers'), rootMargin: '300px' },
     );
     endObserver.observe(getEndElement() as HTMLElement);
   });
