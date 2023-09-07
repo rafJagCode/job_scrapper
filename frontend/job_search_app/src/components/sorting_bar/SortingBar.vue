@@ -18,18 +18,20 @@ const { sortBy } = useSorting();
       <input class="sorting_bar__input" type="radio" value="bestSalary" v-model="sortBy" @click="sortBy === 'bestSalary' && (sortBy = null)" />
       <div class="sorting_bar__content">Best Salary</div>
     </label>
-    <CollapsibleContainer id="sorting_bar__active_filters" v-if="Object.values(filters).some((filter) => filter.length > 0)">
-      <template v-slot:title>Active Filters</template>
-      <template v-slot:content>
-        <div class="sorting_bar__active_filters_container">
-          <CheckBox :type="'onlySpecifiedSalary'" v-if="filters.onlySpecifiedSalary.length > 0" :value="'specified salary'" :key="'onlySpecifiedSalary'">specified salary</CheckBox>
-          <CheckBox :type="'workModes'" v-for="workMode in filters.workModes" :value="workMode" :key="workMode">{{ workMode }}</CheckBox>
-          <CheckBox :type="'experienceLevels'" v-for="experienceLevel in filters.experienceLevels" :value="experienceLevel" :key="experienceLevel">{{ experienceLevel }}</CheckBox>
-          <CheckBox :type="'skills'" v-for="skill in filters.skills" :value="skill" :key="skill">{{ skill }}</CheckBox>
-          <CheckBox :type="'cities'" v-for="city in filters.cities" :value="city" :key="city">{{ city }}</CheckBox>
-        </div>
-      </template>
-    </CollapsibleContainer>
+    <Transition name="fade">
+      <CollapsibleContainer id="sorting_bar__active_filters" v-if="Object.values(filters).some((filter) => filter.length > 0)">
+        <template v-slot:title>Active Filters</template>
+        <template v-slot:content>
+          <div class="sorting_bar__active_filters_container">
+            <CheckBox :type="'onlySpecifiedSalary'" v-if="filters.onlySpecifiedSalary.length > 0" :value="'specified salary'" :key="'onlySpecifiedSalary'">specified salary</CheckBox>
+            <CheckBox :type="'workModes'" v-for="workMode in filters.workModes" :value="workMode" :key="workMode">{{ workMode }}</CheckBox>
+            <CheckBox :type="'experienceLevels'" v-for="experienceLevel in filters.experienceLevels" :value="experienceLevel" :key="experienceLevel">{{ experienceLevel }}</CheckBox>
+            <CheckBox :type="'skills'" v-for="skill in filters.skills" :value="skill" :key="skill">{{ skill }}</CheckBox>
+            <CheckBox :type="'cities'" v-for="city in filters.cities" :value="city" :key="city">{{ city }}</CheckBox>
+          </div>
+        </template>
+      </CollapsibleContainer>
+    </Transition>
   </div>
 </template>
 
@@ -79,6 +81,16 @@ const { sortBy } = useSorting();
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media (orientation: portrait) {
