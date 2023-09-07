@@ -50,7 +50,6 @@ $slider-width: 3rem;
   width: 100%;
   height: 100%;
   background-color: $light-grey;
-  z-index: -1;
   transition: 400ms;
 }
 </style>
