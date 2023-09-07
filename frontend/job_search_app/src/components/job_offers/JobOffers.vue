@@ -41,6 +41,7 @@ onMounted(async () => {
 <style lang="scss">
 .job_offers {
   grid-area: offers;
+  overflow-x: hidden;
   overflow-y: scroll;
   padding-right: 1rem;
 }
