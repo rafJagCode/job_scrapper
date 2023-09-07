@@ -5,8 +5,8 @@ const isCollapsed = ref(true);
 </script>
 
 <template>
-  <div class="collapsible" @click="isCollapsed = !isCollapsed">
-    <div class="collapsible__header">
+  <div class="collapsible">
+    <div class="collapsible__header" @click="isCollapsed = !isCollapsed">
       <p class="collapsible__title">
         <slot name="title"></slot>
       </p>
@@ -14,7 +14,7 @@ const isCollapsed = ref(true);
         <ChevronDownIcon class="icon md" />
       </div>
     </div>
-    <div class="collapsible__content" :data-is-collapsed="isCollapsed" @click.stop>
+    <div class="collapsible__content" :data-is-collapsed="isCollapsed">
       <slot name="content"></slot>
     </div>
   </div>
