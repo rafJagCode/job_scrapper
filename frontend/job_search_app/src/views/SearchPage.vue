@@ -14,10 +14,24 @@ import JobOffers from '@components/job_offers/JobOffers.vue';
 
 <style lang="scss">
 .search_page {
+  display: grid;
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background-color: $primary;
-  overflow: auto;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'filters sorting-bar'
+    'filters offers';
+}
+@media (orientation: portrait) {
+  .search_page {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      'sorting-bar'
+      'filters'
+      'offers';
+  }
 }
 </style>

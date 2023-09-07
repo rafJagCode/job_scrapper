@@ -35,10 +35,10 @@ const { sortBy } = useSorting();
 
 <style lang="scss">
 .sorting_bar {
-  width: calc(100vw - $filters-width - 2 * $filters-margin - 1rem);
-  min-height: 3.5rem;
-  margin-left: calc($filters-width + 2 * $filters-margin);
+  grid-area: sorting-bar;
   margin-top: 1rem;
+  margin-right: 1rem;
+  min-height: 3.5rem;
   border: 1px solid $secondary-light;
   background-color: $primary;
   display: flex;
@@ -79,5 +79,11 @@ const { sortBy } = useSorting();
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+@media (orientation: portrait) {
+  .sorting_bar {
+    margin-left: 1rem;
+  }
 }
 </style>

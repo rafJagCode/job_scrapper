@@ -11,10 +11,6 @@
 
 <style lang="scss">
 .offers_loader {
-  width: calc(100vw - $filters-width - 2 * $filters-margin - 3.53rem);
-  height: calc(100vh - 4.5rem);
-  margin-left: auto;
-  margin-right: 2rem;
   overflow: hidden;
   &__placeholder {
     position: relative;

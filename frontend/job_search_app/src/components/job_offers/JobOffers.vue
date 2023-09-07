@@ -40,9 +40,7 @@ onMounted(async () => {
 
 <style lang="scss">
 .job_offers {
-  width: calc(100vw - $filters-width - 2 * $filters-margin - 2rem);
-  height: calc(100vh - 4.5rem);
-  margin-left: auto;
+  grid-area: offers;
   overflow-y: scroll;
   padding-right: 1rem;
 }
@@ -54,6 +52,11 @@ onMounted(async () => {
   margin: 1rem 0;
   & p:last-child {
     color: $dark-grey;
+  }
+}
+@media (orientation: portrait) {
+  .job_offers {
+    padding-left: 1rem;
   }
 }
 </style>

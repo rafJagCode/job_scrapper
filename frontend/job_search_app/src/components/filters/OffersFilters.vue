@@ -63,15 +63,17 @@ onMounted(async () => {
 
 <style lang="scss">
 .filters {
-  position: fixed;
+  grid-area: filters;
   margin: $filters-margin;
   width: $filters-width;
-  height: auto;
-  max-height: calc(100vh - 2 * $filters-margin);
+  height: fit-content;
+  max-height: calc(100vh - 2rem);
   border: 0.5px solid $secondary-light;
-  border-bottom: none;
   overflow-y: auto;
   user-select: none;
+  & div:last-child {
+    border-bottom: none;
+  }
 }
 .filters__salary {
   height: 3.5rem;
@@ -89,5 +91,11 @@ onMounted(async () => {
 .collapsible__experience_levels {
   display: flex;
   gap: 0.5rem;
+}
+@media (orientation: portrait) {
+  .filters {
+    width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+  }
 }
 </style>
