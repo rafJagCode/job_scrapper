@@ -2,6 +2,7 @@
 ---
 Job Search is an web app which collects IT job offers from several websites and presents them in an accessible way, without
 redundant information.
+
 [__=> LINK TO LIVE VERSION <=__](toDo)
 ---
 ## Table of Contents
