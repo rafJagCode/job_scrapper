@@ -2,9 +2,11 @@ import { readFile } from '../helpers/file.js';
 import DataUpdater from '../scrapper/updating_data/DataUpdater.js';
 import express, { Response, NextFunction } from 'express';
 import cors from 'cors';
+import vhost from 'vhost';
 
 const dataUpdater = new DataUpdater();
 const app = express();
+const port = process.env.PORT || 8000;
 
 dataUpdater.start();
 
@@ -38,6 +40,15 @@ app.get('/cities', async (req, res, next) => {
   else sendFileContent(res, next, 'all_cities.json');
 });
 
-app.listen(8080, () => {
-  console.log('Server is running on port 8080');
-});
+if (process.env.PORT) {
+  const virtualApp = express();
+  const domain = 'jobsearch.rafaljagielski.ovh';
+  virtualApp.use(vhost(domain, app));
+  virtualApp.listen(port, () => {
+    console.log(`Server running on ${domain} on port ${port}`);
+  });
+} else {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
