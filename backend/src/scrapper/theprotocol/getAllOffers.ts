@@ -19,6 +19,23 @@ export const getAllOffers = async () => {
     page = await browser.newPage();
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36');
     await page.setJavaScriptEnabled(true);
+    await page.setExtraHTTPHeaders({
+      Host: 'theprotocol.it',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/117.0',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+      'Accept-Language': 'pl,en-US;q=0.7,en;q=0.3',
+      'Accept-Encoding': 'gzip, deflate, br',
+      Pragma: 'no-cache',
+      Connection: 'keep-alive',
+      Cookie:
+        '_ga_Z6EL58B8FL=GS1.1.1694556523.1.0.1694556523.60.0.0; cf_clearance=qxoCa2gIQLaXZoC88ATO04SDjp6fnFw69FDbUKa.TUM-1694556608-0-1-28b0b84.66e4d439.558a5464-250.0.0; gp__cfXfiDZP=66; _cfuvid=pHButOC0QRMZ3KAKBU_poaL_I1rZYoBk0dPaGKGLUVw-1694556618040-0-604800000; gptrackCookie=bfc34f23-90ed-400f-y498-2355e5353b45; cp_core=1; cp_personalized=1; cp_comfortable=1; cp_advertisement=1; cp_watch=1; cp_social=1; cookiesPolicy=v3; gp_ab__relevance__13=B; _ga=GA1.2.1507821158.1694556524; _rdt_uuid=1694556523980.b2d08af7-3387-4108-a0dd-9c796c6751a5; _gid=GA1.2.1653235905.1694556525; _tt_enable_cookie=1; _ttp=Rrl29FDK9_RfjD_rLFQ-cyFiS9A; _hjSessionUser_2833973=eyJpZCI6Ijg2M2IwZjc4LTFjNWEtNTZlOC1hY2JkLTNjYjE2OTFiOWQ4YSIsImNyZWF0ZWQiOjE2OTQ1NTY1MjY4NTcsImV4aXN0aW5nIjpmYWxzZX0=; _hjFirstSeen=1; _hjIncludedInSessionSample_2833973=0; _hjSession_2833973=eyJpZCI6Ijc3ZTJjYmFjLTdlYTctNDE0Yy1hY2Y5LWM1ZDdhZWQ3ZGI3MCIsImNyZWF0ZWQiOjE2OTQ1NTY1MjY4NTgsImluU2FtcGxlIjpmYWxzZX0=; _hjAbsoluteSessionInProgress=0; ln_or=eyIzMTI3NzYyIjoiZCJ9; cto_bundle=jhWyZV9mJTJCMjV6SmlXM0dGTTlvNWJrbERmZEYxbDdnTEUxUVUzR1VTQ2ElMkJXWkRrb0dxbVJ2OWthM3hsSnh2aGlXUiUyRm11MFdjNkIlMkJwNHl1V0dERFRPVVVISDJ1SHhyaEslMkZzUDN3S0JrZUtPOXFBREIzdlVkV01wTE9VWko2MU9nbWJjeXBBS2Vaek9qYVdJQUtIR3NNQm9oUDhnJTNEJTNE',
+      'Upgrade-Insecure-Requests': '1',
+      'Sec-Fetch-Dest': 'document',
+      'Sec-Fetch-Mode': 'navigate',
+      'Sec-Fetch-Site': 'none',
+      'Sec-Fetch-User': '?1',
+      'Cache-Control': 'no-cache',
+    });
     console.log('Created new page');
   } catch (err) {
     console.log(`While awaiting new page occured error => ${err.message}`);
