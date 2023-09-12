@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import { PracujOffer } from './PracujOffer.js';
 
 export const getAllOffers = async () => {
-  const browser = await puppeteer.launch({ headless: 'new' });
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
   const page = await browser.newPage();
 
   await page.goto('https://www.pracuj.pl/praca/it%20-%20rozw%C3%B3j%20oprogramowania;cc,5016/programowanie;cc,5016003');
