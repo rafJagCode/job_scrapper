@@ -12,9 +12,20 @@ export const getAllOffers = async () => {
   }
 
   console.log('Browser running...');
-  const page = await browser.newPage();
+  let page: puppeteer.Page | null = null;
+  try {
+    page = await browser.newPage();
+  } catch (err) {
+    console.log(`While awaiting new page occured error => ${err.message}`);
+    return [];
+  }
 
-  await page.goto('https://theprotocol.it');
+  try {
+    await page.goto('https://theprotocol.it');
+  } catch (err) {
+    console.log(`While going to page https://theprotocol.it occured error => ${err.message}`);
+    return [];
+  }
 
   const mainScriptInfo = await getScriptInfo(page);
   let { currentPage, amountOfPages } = getPaginationInfo(mainScriptInfo);
