@@ -1,12 +1,14 @@
 import updateData from './updateData.js';
 import cron from 'node-cron';
+import dotenv from 'dotenv';
+dotenv.config();
 
 class DataUpdater {
   private job: cron.ScheduledTask;
   private updating = false;
 
   constructor() {
-    this.job = cron.schedule('* 4 * * *', () => this.update(), {
+    this.job = cron.schedule(process.env.CRON_SCHEDULE, () => this.update(), {
       scheduled: false,
       timezone: 'Europe/Warsaw',
     });

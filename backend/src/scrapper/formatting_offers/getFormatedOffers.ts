@@ -12,15 +12,21 @@ import simplifySkills from '../formatting_skills/simplifySkills.js';
 import { Offer } from '../Offer.js';
 
 const getFormatedOffers = async (): Promise<Offer[]> => {
+  console.log('Getting offers from justJoinIt...');
   const justJoinItOffers = (await getAllJustJoinItOffers()).map(adaptJustJoinItOffer);
+  console.log('Getting offers from theprotocol...');
   const theprotocolOffers = (await getAllTheprotocolOffers()).map(adaptTheprotocolOffer);
+  console.log('Getting offers from  pracuj...');
   const pracujOffers = (await getAllPracujOffers()).map(adaptPracujOffer);
+  console.log('Getting offers completed');
 
   const allSkills = getAllSkills([...justJoinItOffers, ...theprotocolOffers]);
   const simplifiedSkillsMap = getSimplifiedSkillsMap(allSkills);
   const allSimplifiedSkills = getAllSimplifiedSkills(simplifiedSkillsMap);
 
+  console.log('Filling skills in pracuj offers...');
   fillSkills(pracujOffers, allSimplifiedSkills);
+  console.log('Simplifing skills...');
   simplifySkills(justJoinItOffers, simplifiedSkillsMap);
   simplifySkills(theprotocolOffers, simplifiedSkillsMap);
 

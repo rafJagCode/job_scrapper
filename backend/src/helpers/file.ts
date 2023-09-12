@@ -10,9 +10,13 @@ export const readFile = async (path: string): Promise<any> => {
 };
 
 export const writeFile = async (path: string, object: any): Promise<void> => {
+  console.log(`Writing to file ${path}...`);
   return new Promise((resolve, reject) =>
     fs.writeFile(path, JSON.stringify(object), (err) => {
-      if (err) reject(err);
+      if (err) {
+        console.log(`While writing to file ${path} occured an error => ${err.message}`);
+        reject(err);
+      }
       resolve();
     }),
   );
