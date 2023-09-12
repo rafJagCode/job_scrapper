@@ -5,7 +5,7 @@ export const getAllOffers = async () => {
   let browser: puppeteer.Browser | null = null;
 
   try {
-    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--proxy-server=127.0.0.1:9876'] });
+    browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox'] });
     const version = await browser.version();
     console.log(version);
   } catch (err) {
