@@ -30,6 +30,8 @@ export const getAllOffers = async () => {
     currentPage += 1;
     console.log(`Scrapping page ${currentPage}...`);
     await page.goto(`https://theprotocol.it/praca?pageNumber=${currentPage}`);
+    const html = await page.content();
+    console.log(html);
     const scriptInfo = await getScriptInfo(page);
     offers.push(...scriptInfo.props.pageProps.offersResponse.offers);
     const paginationInfo = getPaginationInfo(scriptInfo);
