@@ -66,9 +66,11 @@ type ScriptInfo = {
 const getScriptInfo = async (page: puppeteer.Page) => {
   let scriptInnerHtml: string | null = null;
   try {
-    scriptInnerHtml = await page.$$eval('#__NEXT_DATA__', (elements) => {
-      console.log(elements);
-      return elements[0].innerHTML;
+    await page.waitForSelector('#__NEXT_DATA__');
+    console.log('__NEXT_DATA__ is in HTML DOM');
+    scriptInnerHtml = await page.$eval('#__NEXT_DATA__', (el) => {
+      console.log(el);
+      return el.innerHTML;
     });
     console.log('Script info retrived successfully');
   } catch (err) {
