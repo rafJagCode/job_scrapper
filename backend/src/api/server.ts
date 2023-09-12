@@ -3,10 +3,12 @@ import DataUpdater from '../scrapper/updating_data/DataUpdater.js';
 import express, { Response, NextFunction } from 'express';
 import cors from 'cors';
 import vhost from 'vhost';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const dataUpdater = new DataUpdater();
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.NODE_ENV === 'production' ? 80 : 8000;
 
 dataUpdater.start();
 
@@ -40,7 +42,7 @@ app.get('/cities', async (req, res, next) => {
   else sendFileContent(res, next, 'all_cities.json');
 });
 
-if (process.env.PORT) {
+if (process.env.NODE_ENV === 'production') {
   const virtualApp = express();
   const domain = 'jobsearch.rafaljagielski.ovh';
   virtualApp.use(vhost(domain, app));
