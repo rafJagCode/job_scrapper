@@ -3,3 +3,4 @@
 /backend/all_cities.json
 /backend/all_offers.json
 /backend/all_skills.json
+/backend/.env

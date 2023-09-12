@@ -1,11 +1,13 @@
 import puppeteer from 'puppeteer';
 import { TheprotocolOffer } from './TheProtocolOffer.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const getAllOffers = async () => {
   let browser: puppeteer.Browser | null = null;
 
   try {
-    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
+    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', `--proxy-server=${process.env.PROXY}`] });
     const version = await browser.version();
     console.log(version);
   } catch (err) {
