@@ -21,20 +21,13 @@ export const getAllOffers = async () => {
     return [];
   }
 
-  try {
-    await page.goto('https://theprotocol.it');
-    console.log('Visited https://theprotocol.it');
-  } catch (err) {
-    console.log(`While going to page https://theprotocol.it occured error => ${err.message}`);
-    return [];
-  }
-
   const offers: TheprotocolOffer[] = [];
 
   console.log('Scrapping theprotocol pages...');
-  let currentPage = 1;
+  let currentPage = 0;
   let amountOfPages: number;
   do {
+    currentPage += 1;
     console.log(`Scrapping page ${currentPage}...`);
     await page.goto(`https://theprotocol.it/praca?pageNumber=${currentPage}`);
     const scriptInfo = await getScriptInfo(page);
