@@ -2,7 +2,16 @@ import puppeteer from 'puppeteer';
 import { TheprotocolOffer } from './TheProtocolOffer.js';
 
 export const getAllOffers = async () => {
-  const browser = await puppeteer.launch({ headless: 'new' });
+  let browser: puppeteer.Browser | null = null;
+
+  try {
+    browser = await puppeteer.launch({ headless: 'new' });
+  } catch (err) {
+    console.log(`While oppening browser occured error => ${err.message}`);
+    return [];
+  }
+
+  console.log('Browser running...');
   const page = await browser.newPage();
 
   await page.goto('https://theprotocol.it');
@@ -11,7 +20,9 @@ export const getAllOffers = async () => {
   let { currentPage, amountOfPages } = getPaginationInfo(mainScriptInfo);
   const offers: TheprotocolOffer[] = mainScriptInfo.props.pageProps.offersResponse.offers;
 
+  console.log('Scrapping theprotocol pages...');
   for (let i = currentPage + 1; i <= amountOfPages; i++) {
+    console.log(`Scrapping page ${i}...`);
     await page.goto(`https://theprotocol.it/?pageNumber=${i}`);
     const scriptInfo = await getScriptInfo(page);
     offers.push(...scriptInfo.props.pageProps.offersResponse.offers);
