@@ -15,6 +15,7 @@ export const getAllOffers = async () => {
   let page: puppeteer.Page | null = null;
   try {
     page = await browser.newPage();
+    console.log('Created new page');
   } catch (err) {
     console.log(`While awaiting new page occured error => ${err.message}`);
     return [];
@@ -22,12 +23,21 @@ export const getAllOffers = async () => {
 
   try {
     await page.goto('https://theprotocol.it');
+    console.log('Visited https://theprotocol.it');
   } catch (err) {
     console.log(`While going to page https://theprotocol.it occured error => ${err.message}`);
     return [];
   }
 
-  const mainScriptInfo = await getScriptInfo(page);
+  let mainScriptInfo: ScriptInfo | null = null;
+  try {
+    mainScriptInfo = await getScriptInfo(page);
+    console.log('Succesfully retrived main script info');
+  } catch (err) {
+    console.log(`While retriving main script info occured error => ${err.message}`);
+    return [];
+  }
+
   let { currentPage, amountOfPages } = getPaginationInfo(mainScriptInfo);
   const offers: TheprotocolOffer[] = mainScriptInfo.props.pageProps.offersResponse.offers;
 
