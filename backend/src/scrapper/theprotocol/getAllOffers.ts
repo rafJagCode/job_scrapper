@@ -5,7 +5,7 @@ export const getAllOffers = async () => {
   let browser: puppeteer.Browser | null = null;
 
   try {
-    browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox'] });
+    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
   } catch (err) {
     console.log(`While oppening browser occured error => ${err.message}`);
     return [];
@@ -15,6 +15,8 @@ export const getAllOffers = async () => {
   let page: puppeteer.Page | null = null;
   try {
     page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36');
+    await page.setJavaScriptEnabled(true);
     console.log('Created new page');
   } catch (err) {
     console.log(`While awaiting new page occured error => ${err.message}`);
