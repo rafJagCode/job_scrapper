@@ -6,6 +6,8 @@ export const getAllOffers = async () => {
 
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
+    const version = await browser.version();
+    console.log(version);
   } catch (err) {
     console.log(`While oppening browser occured error => ${err.message}`);
     return [];
