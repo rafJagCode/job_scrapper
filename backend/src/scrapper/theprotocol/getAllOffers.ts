@@ -29,25 +29,20 @@ export const getAllOffers = async () => {
     return [];
   }
 
-  let mainScriptInfo: ScriptInfo | null = null;
-  try {
-    mainScriptInfo = await getScriptInfo(page);
-    console.log('Succesfully retrived main script info');
-  } catch (err) {
-    console.log(`While retriving main script info occured error => ${err.message}`);
-    return [];
-  }
-
-  let { currentPage, amountOfPages } = getPaginationInfo(mainScriptInfo);
-  const offers: TheprotocolOffer[] = mainScriptInfo.props.pageProps.offersResponse.offers;
+  const offers: TheprotocolOffer[] = [];
 
   console.log('Scrapping theprotocol pages...');
-  for (let i = currentPage + 1; i <= amountOfPages; i++) {
-    console.log(`Scrapping page ${i}...`);
-    await page.goto(`https://theprotocol.it/?pageNumber=${i}`);
+  let currentPage = 1;
+  let amountOfPages: number;
+  do {
+    console.log(`Scrapping page ${currentPage}...`);
+    await page.goto(`https://theprotocol.it/praca?pageNumber=${currentPage}`);
     const scriptInfo = await getScriptInfo(page);
     offers.push(...scriptInfo.props.pageProps.offersResponse.offers);
-  }
+    const paginationInfo = getPaginationInfo(scriptInfo);
+    currentPage = paginationInfo.currentPage;
+    amountOfPages = paginationInfo.amountOfPages;
+  } while (currentPage !== amountOfPages);
 
   await browser.close();
   return offers;
@@ -69,7 +64,13 @@ type ScriptInfo = {
 };
 
 const getScriptInfo = async (page: puppeteer.Page) => {
-  const scriptInnerHtml = await page.$$eval('#__NEXT_DATA__', (elements) => elements[0].innerHTML);
+  let scriptInnerHtml: string | null = null;
+  try {
+    scriptInnerHtml = await page.$$eval('#__NEXT_DATA__', (elements) => elements[0].innerHTML);
+    console.log('Script info retrived successfully');
+  } catch (err) {
+    console.log(`While retriving script info occured error => ${err.message}`);
+  }
   const scriptInfo: ScriptInfo = JSON.parse(scriptInnerHtml);
   return scriptInfo;
 };
