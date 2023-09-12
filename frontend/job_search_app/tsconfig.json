@@ -16,6 +16,7 @@
     },
 
     /* Bundler mode */
+    "forceConsistentCasingInFileNames": false,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
