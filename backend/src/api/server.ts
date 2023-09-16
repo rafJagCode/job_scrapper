@@ -44,7 +44,7 @@ app.get('/cities', async (req, res, next) => {
 
 if (process.env.NODE_ENV === 'production') {
   const virtualApp = express();
-  const domain = 'jobsearch.rafaljagielski.ovh';
+  const domain = process.env.DOMAIN;
   virtualApp.use(vhost(domain, app));
   virtualApp.listen(port, () => {
     console.log(`Server running on ${domain} on port ${port}`);
