@@ -42,7 +42,7 @@ class OfferService {
         if (err.response) message = err.response.data.message;
         else message = 'There was some problem with accessing server. Check your network and try again.';
       } else message = 'Oops! Unexpected error occured. Please try again.';
-      if (!message.length) message = 'While trying to connect to server, an error occured. Please try again.';
+      if (!message || !message.length) message = 'While trying to connect to server, an error occured. Please try again.';
       showError({ id: uuid.v4(), message });
     }
     return { data };
