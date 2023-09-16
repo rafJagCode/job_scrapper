@@ -37,10 +37,13 @@ class OfferService {
       data.value = null;
       data.value = (await this.http.get(endpoint)).data;
     } catch (err) {
+      let message = '';
       if (axios.isAxiosError(err)) {
-        if (err.response) showError({ id: uuid.v4(), message: err.response.data.message });
-        else showError({ id: uuid.v4(), message: 'There was some problem with accessing server. Check your network and try again.' });
-      } else showError({ id: uuid.v4(), message: 'Oops! Unexpected error occured. Please try again.' });
+        if (err.response) message = err.response.data.message;
+        else message = 'There was some problem with accessing server. Check your network and try again.';
+      } else message = 'Oops! Unexpected error occured. Please try again.';
+      if (!message.length) message = 'While trying to connect to server, an error occured. Please try again.';
+      showError({ id: uuid.v4(), message });
     }
     return { data };
   }
