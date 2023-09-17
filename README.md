@@ -48,10 +48,10 @@ List of technologies used to build the app:
 
 ![App Screenshot](./readme_images/job_search.png)
 
-- $\color{green}{Marked\ by\ green\ rectangle\ are\ available\ filters.}$
-- $\color{red}{Marked\ by\ red\ rectangle\ are\ sorting\ options.}$
-- $\color{yellow}{Marked\ by\ yellow\ rectangle\ are\ active\ filters.}$
-- $\color{purple}{Marked\ by\ purple\ rectangle\ is\ list\ of\ job\ offers\ that\ meets\ selected\ filters.}$
+- $\color{green}{\textrm{Marked\ by\ green\ rectangle\ are\ available\ filters.}}$
+- $\color{red}{\textrm{Marked\ by\ red\ rectangle\ are\ sorting\ options.}}$
+- $\color{yellow}{\textrm{Marked\ by\ yellow\ rectangle\ are\ active\ filters.}}$
+- $\color{#ff00ff}{\textrm{Marked\ by\ purple\ rectangle\ is\ list\ of\ job\ offers\ that\ meets\ selected\ filters.}}$
 
 ## $\color{orange}{License}$
 
