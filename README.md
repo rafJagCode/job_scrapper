@@ -51,7 +51,7 @@ List of technologies used to build the app:
 - $\color{green}{Marked\ by\ green\ rectangle\ are\ available\ filters.}$
 - $\color{red}{Marked\ by\ red\ rectangle\ are\ sorting\ options.}$
 - $\color{yellow}{Marked\ by\ yellow\ rectangle\ are\ active\ filters.}$
-- $\color{magenta}{Marked\ by\ purple\ rectangle\ is\ list\ of\ job\ offers\ that\ meets\ selected\ filters.}$
+- $\color{purple}{Marked\ by\ purple\ rectangle\ is\ list\ of\ job\ offers\ that\ meets\ selected\ filters.}$
 
 ## $\color{orange}{License}$
 
