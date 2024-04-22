@@ -1,122 +1,87 @@
 export type JustJoinItOffer = {
+  slug: string;
   title: string;
-  street: null | string;
+  requiredSkills: string[];
+  niceToHaveSkills: null;
+  workplaceType: WorkplaceType;
+  workingTime: WorkingTime;
+  experienceLevel: ExperienceLevel;
+  employmentTypes: EmploymentType[];
+  categoryId: number;
+  multilocation: Multilocation[];
   city: string;
-  country_code: CountryCode | null;
-  address_text: string;
-  marker_icon: MarkerIcon;
-  workplace_type: WorkplaceType;
-  company_name: string;
-  company_url: string;
-  company_size: string;
-  experience_level: ExperienceLevel;
+  street: string;
   latitude: string;
   longitude: string;
-  published_at: string;
-  remote_interview: boolean;
-  open_to_hire_ukrainians: boolean;
-  id: string;
-  display_offer: boolean;
-  employment_types: EmploymentType[];
-  company_logo_url: string;
-  skills: Skill[];
-  remote: boolean;
-  multilocation: Multilocation[];
-  way_of_apply: WayOfApply;
+  remoteInterview: boolean;
+  companyName: string;
+  companyLogoThumbUrl: string;
+  publishedAt: string;
+  openToHireUkrainians: boolean;
 };
-
-export type CountryCode =
-  | 'PL'
-  | 'US'
-  | 'CZ'
-  | 'SA'
-  | 'UY'
-  | 'RO'
-  | 'MT'
-  | 'TR'
-  | 'DK'
-  | 'AT'
-  | 'GB'
-  | 'CH'
-  | 'IL'
-  | 'SK'
-  | 'CY'
-  | 'PT'
-  | 'HU'
-  | 'SE'
-  | 'DE'
-  | 'LU'
-  | 'BE'
-  | 'FR'
-  | 'ES'
-  | 'UA'
-  | 'LT'
-  | 'LV'
-  | 'FI'
-  | 'NL'
-  | 'RS'
-  | 'GR'
-  | 'BG'
-  | 'AM'
-  | 'NO'
-  | 'SI'
-  | 'ZA'
-  | 'EE';
 
 export type EmploymentType = {
+  to: number | null;
+  from: number | null;
   type: Type;
-  salary: Salary | null;
-};
-
-export type Salary = {
-  from: number;
-  to: number;
+  to_chf: number | null;
+  to_eur: number | null | string;
+  to_gbp: number | null;
+  to_pln: number | null | string;
+  to_usd: number | null | string;
   currency: Currency;
+  from_chf: number | null;
+  from_eur: number | null | string;
+  from_gbp: number | null;
+  from_pln: number | null | string;
+  from_usd: number | null | string;
+  gross?: boolean;
 };
 
-export type Currency = 'pln' | 'usd' | 'eur' | 'gbp';
+export enum Currency {
+  Eur = 'eur',
+  Pln = 'pln',
+  Usd = 'usd',
+}
 
-export type Type = 'b2b' | 'permanent' | 'mandate_contract';
+export enum Type {
+  Any = 'any',
+  B2B = 'b2b',
+  MandateContract = 'mandate_contract',
+  Permanent = 'permanent',
+}
 
-export type ExperienceLevel = 'senior' | 'mid' | 'junior';
-
-export type MarkerIcon =
-  | 'devops'
-  | 'php'
-  | 'data'
-  | 'c'
-  | 'security'
-  | 'javascript'
-  | 'pm'
-  | 'admin'
-  | 'testing'
-  | 'analytics'
-  | 'mobile'
-  | 'support'
-  | 'net'
-  | 'python'
-  | 'architecture'
-  | 'java'
-  | 'game'
-  | 'other'
-  | 'go'
-  | 'ux'
-  | 'ruby'
-  | 'erp'
-  | 'html'
-  | 'scala';
+export enum ExperienceLevel {
+  CLevel = 'c_level',
+  Junior = 'junior',
+  Mid = 'mid',
+  Senior = 'senior',
+}
 
 export type Multilocation = {
   city: string;
   slug: string;
-  street: null | string;
+  street: string;
+  latitude: number;
+  longitude: number;
 };
 
-export type Skill = {
-  name: string;
-  level: number;
+export enum WorkingTime {
+  Freelance = 'freelance',
+  FullTime = 'full_time',
+  PartTime = 'part_time',
+}
+
+export enum WorkplaceType {
+  Hybrid = 'hybrid',
+  Office = 'office',
+  Remote = 'remote',
+}
+
+export type Meta = {
+  page: number;
+  totalItems: number;
+  totalPages: number;
+  prevPage: number;
+  nextPage: number;
 };
-
-export type WayOfApply = 'redirect' | 'form';
-
-export type WorkplaceType = 'partly_remote' | 'remote' | 'office';
