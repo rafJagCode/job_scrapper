@@ -8,14 +8,11 @@ export const getAllOffers = async () => {
 
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', `--proxy-server=${process.env.PROXY}`] });
-    const version = await browser.version();
-    console.log(version);
   } catch (err) {
     console.log(`While oppening browser occured error => ${err.message}`);
     return [];
   }
 
-  console.log('Browser running...');
   let page: puppeteer.Page | null = null;
   try {
     page = await browser.newPage();
@@ -24,7 +21,6 @@ export const getAllOffers = async () => {
       password: process.env.PROXY_PASSWORD,
     });
     await page.setJavaScriptEnabled(true);
-    console.log('Created new page');
   } catch (err) {
     console.log(`While awaiting new page occured error => ${err.message}`);
     return [];
@@ -32,7 +28,6 @@ export const getAllOffers = async () => {
 
   const offers: TheprotocolOffer[] = [];
 
-  console.log('Scrapping theprotocol pages...');
   let currentPage = 0;
   let amountOfPages: number;
   do {
@@ -69,12 +64,10 @@ const getScriptInfo = async (page: puppeteer.Page) => {
   let scriptInnerHtml: string | null = null;
   try {
     await page.waitForSelector('#__NEXT_DATA__', { timeout: 0 });
-    console.log('__NEXT_DATA__ is in HTML DOM');
     scriptInnerHtml = await page.$eval('#__NEXT_DATA__', (el) => {
       console.log(el);
       return el.innerHTML;
     });
-    console.log('Script info retrived successfully');
   } catch (err) {
     console.log(`While retriving script info occured error => ${err.message}`);
   }
