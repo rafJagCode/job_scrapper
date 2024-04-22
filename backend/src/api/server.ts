@@ -10,7 +10,7 @@ const dataUpdater = new DataUpdater();
 const app = express();
 const port = process.env.NODE_ENV === 'production' ? 666 : 8000;
 
-dataUpdater.start();
+// dataUpdater.start();
 
 app.use(cors());
 
