@@ -5,6 +5,7 @@ export const getAllOffers = async () => {
   const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
   const page = await browser.newPage();
 
+  console.log(`Scrapping page 1`);
   await page.goto('https://www.pracuj.pl/praca/it%20-%20rozw%C3%B3j%20oprogramowania;cc,5016/programowanie;cc,5016003');
 
   const amountOfPages = await page.$$eval("[data-test='top-pagination-max-page-number'", (elements) => Number(elements[0].innerHTML));
@@ -12,6 +13,7 @@ export const getAllOffers = async () => {
   const offers: PracujOffer[] = mainScriptInfo.props.pageProps.data.jobOffers.groupedOffers;
 
   for (let i = 2; i <= amountOfPages; i++) {
+    console.log(`Scrapping page ${i}`);
     await page.goto(`https://www.pracuj.pl/praca/it%20-%20rozw%C3%B3j%20oprogramowania;cc,5016/programowanie;cc,5016003?pn=${i}`);
     const scriptInfo = await getScriptInfo(page);
     offers.push(...scriptInfo.props.pageProps.data.jobOffers.groupedOffers);
