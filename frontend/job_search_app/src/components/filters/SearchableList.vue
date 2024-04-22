@@ -2,17 +2,31 @@
 import CheckBox from './CheckBox.vue';
 import { Filters } from '@my_types/Filters';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
+let timer: ReturnType<typeof setInterval>;
+const RENDER_BATCH_SIZE = 30;
 const search = ref('');
 const isSearchFocused = ref(false);
+const amountOfRenderedItems = ref(RENDER_BATCH_SIZE);
 
 const filteredItems = computed(() => {
   if (!props.items || !props.items.length) return [];
   if (!search.value.length) return props.items;
-  const regexp = new RegExp(`${search.value}`, 'gi');
+  const regexp = new RegExp(`\\b${search.value}`, 'gi');
   return props.items.filter((item) => item.match(regexp));
 });
+
+watch(filteredItems, () => {
+  clearInterval(timer);
+  amountOfRenderedItems.value = RENDER_BATCH_SIZE;
+  timer = setInterval(() => {
+    amountOfRenderedItems.value += RENDER_BATCH_SIZE;
+    if (amountOfRenderedItems.value >= filteredItems.value.length) clearInterval(timer);
+  }, 100);
+});
+
+const itemsToRender = computed(() => filteredItems.value.slice(0, amountOfRenderedItems.value));
 
 const props = defineProps<{
   type: Exclude<keyof Filters, 'onlySpecifiedSalary'>;
@@ -28,7 +42,7 @@ const props = defineProps<{
       <p class="list__search_placeholder" :data-transformed="isSearchFocused || search.length > 0">Search</p>
     </div>
     <ul class="list__items">
-      <li v-for="item in filteredItems" :key="item">
+      <li v-for="item in itemsToRender" :key="item">
         <CheckBox :type="type" :value="item">{{ item }}</CheckBox>
       </li>
     </ul>
