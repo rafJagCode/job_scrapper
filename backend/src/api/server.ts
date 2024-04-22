@@ -42,7 +42,7 @@ app.get('/cities', async (req, res, next) => {
   else sendFileContent(res, next, 'all_cities.json');
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'PROD') {
   const virtualApp = express();
   const domain = process.env.DOMAIN;
   virtualApp.use(vhost(domain, app));
