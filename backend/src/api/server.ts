@@ -8,7 +8,7 @@ dotenv.config();
 
 const dataUpdater = new DataUpdater();
 const app = express();
-const port = process.env.NODE_ENV === 'production' ? 666 : 8000;
+const port = process.env.NODE_ENV === 'PROD' ? 666 : 8000;
 
 // dataUpdater.start();
 
@@ -43,12 +43,18 @@ app.get('/cities', async (req, res, next) => {
 });
 
 if (process.env.NODE_ENV === 'PROD') {
-  const virtualApp = express();
   const domain = process.env.DOMAIN;
-  virtualApp.use(vhost(domain, app));
-  virtualApp.listen(port, () => {
-    console.log(`Server running on ${domain} on port ${port}`);
-  });
+  if (process.env.ENABLE_PROXY) {
+    const virtualApp = express();
+    virtualApp.use(vhost(domain, app));
+    virtualApp.listen(port, () => {
+      console.log(`Server running on ${domain} on port ${port} using proxy ${process.env.PROXY}`);
+    });
+  } else {
+    app.listen(port, () => {
+      console.log(`Server is running on ${domain} on port ${port}`);
+    });
+  }
 } else {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
