@@ -13,4 +13,6 @@ const updateData = async () => {
   await writeFile('all_cities.json', cities);
 };
 
+updateData();
+
 export default updateData;
