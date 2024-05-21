@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import { JustJoinItOffer, Meta } from './JustJoinItOffer.js';
 
 export const getAllOffers = async () => {
-  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
   const page = await browser.newPage();
   await page.setJavaScriptEnabled(true);
 
