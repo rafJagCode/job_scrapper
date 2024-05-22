@@ -10,7 +10,7 @@ const dataUpdater = new DataUpdater();
 const app = express();
 const port = process.env.NODE_ENV === 'PROD' ? 666 : 8000;
 
-if (Boolean(process.env.ENABLE_CRON)) dataUpdater.start();
+if ((process.env.ENABLE_CRON = 'true')) dataUpdater.start();
 
 app.use(cors());
 
@@ -44,7 +44,7 @@ app.get('/cities', async (req, res, next) => {
 
 if (process.env.NODE_ENV === 'PROD') {
   const domain = process.env.DOMAIN;
-  if (Boolean(process.env.ENABLE_PROXY)) {
+  if ((process.env.ENABLE_PROXY = 'true')) {
     const virtualApp = express();
     virtualApp.use(vhost(domain, app));
     virtualApp.listen(port, () => {
