@@ -60,6 +60,51 @@ List of technologies used to build the app:
 - $\color{red}{\textrm{Marked by red rectangle are sorting options.}}$
 - $\color{yellow}{\textrm{Marked by yellow rectangle are active filters.}}$
 
+## Build Setup
+
+- Clone repository
+
+  ```sh
+  git clone https://github.com/rafJagCode/job_scrapper.git
+  ```
+
+- Install dependencies
+
+  ```sh
+  (cd job_scrapper/backend && npm install)
+  (cd job_scrapper/frontend/job_search_app && npm install)
+  ```
+
+- Create .env files
+
+  ```sh
+  cp job_scrapper/backend/.env.example job_scrapper/backend/.env
+  cp job_scrapper/frontend/job_search_app/.env.example job_scrapper/frontend/job_search_app/.env.development
+  cp job_scrapper/frontend/job_search_app/.env.example job_scrapper/frontend/job_search_app/.env.production
+  ```
+
+- Fill in .env files
+
+  ```sh
+  vim job_scrapper/backend/.env
+  vim job_scrapper/frontend/job_search_app/.env.development
+  vim job_scrapper/frontend/job_search_app/.env.production
+  ```
+
+- Build and serve backend
+
+  ```sh
+  (cd job_scrapper/backend && npm run build)
+  (cd job_scrapper/backend && node dist/api/server.js)
+  ```
+
+- Serve develompment or build for production frontend
+
+  ```sh
+  (cd job_scrapper/frontend/job_search_app && npm run dev)
+  (cd job_scrapper/frontend/job_search_app && npm run build)
+  ```
+
 ## License
 
 MIT
